@@ -1,0 +1,16 @@
+
+name: conditionals
+on: [push]
+jobs:
+  regular_job:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Regular step"
+      # - name: Force fail
+      #   run: exit 1
+      - name: Sucess notification
+        if: ${{ success() }}
+        run: echo "Send a success notification to Slack"
+      - name: Failure notfication
+        if: ${{ failure() }}
+        run: echo "Send a failure notification to Slack"
