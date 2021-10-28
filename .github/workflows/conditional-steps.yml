@@ -6,8 +6,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo "Regular step"
-      # - name: Force fail
-      #   run: exit 1
+      - name: Force fail
+        run: exit 1
       - name: Sucess notification
         if: ${{ success() }}
         run: echo "Send a success notification to Slack"
