@@ -1,8 +1,20 @@
 # this is the work flow name
 name: setup-node
 
-# this is the trigger
-on: [push]
+# # this is the trigger
+# on: [push]
+
+##another example
+
+# on:
+#   push:
+#     branches :
+#       - "main"
+
+name: scheduled
+  on:
+    schedule :
+      - cron: '*/2 * * * *'
 
 ## on the push to the branch it runs the jobs below
 
