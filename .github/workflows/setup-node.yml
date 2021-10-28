@@ -1,0 +1,23 @@
+# this is the work flow name
+name: setup-node
+
+# this is the trigger
+on: [push]
+
+## on the push to the branch it runs the jobs below
+
+## the jobs runs on a runner ie line 12 which is a container to be specified eg ubuntu-lastest
+
+
+jobs:
+  setup-node:
+    runs-on: ubuntu-latest
+
+    ### each job has steps(line 22 , 23) and actions(18,19)
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - run: npm -v
+      - run: node -v
