@@ -2,6 +2,7 @@ name: conditionals
 on: [push]
 jobs:
  regular_job:
+ ## to specify the branch name
    if: ${{ github.ref != 'refs/heads/main' }}
    runs-on: ubuntu-latest
    steps:

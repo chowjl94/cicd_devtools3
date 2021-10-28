@@ -1,0 +1,24 @@
+## job name
+name: caching
+on:
+  push:
+    branches:
+      - main
+jobs:
+  caching:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Cache files
+      id: cache-step
+      uses: actions/cache@v2
+      env:
+        cache-name: cache-files
+      with:
+        path: ./cache-files
+        key: cache-files-${{ hashFiles('./cache-files/*') }}
+        restore-keys: cache-files-
+    - run: echo "Cache was not hit "
+      if: ${{ steps.cache-step.outputs.cache-hit != 'true' }}
+    - run: echo "Cache was hit"
+      if: ${{ steps.cache-step.outputs.cache-hit == 'true' }}

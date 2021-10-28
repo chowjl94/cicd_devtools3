@@ -1,3 +1,5 @@
+### needs -===> makes the steps dependent on each other , 
+### if to specify a independent job
 name: dependent-jobs
 on:
   push:
