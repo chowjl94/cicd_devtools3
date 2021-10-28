@@ -1,0 +1,46 @@
+name: artifacts
+on: [push]
+jobs:
+  addition:
+    name: Add 3 and 7
+    runs-on: ubuntu-latest
+    steps:
+      - shell: bash
+        run: expr 3 + 7 > math-homework.txt
+      - name: Upload math result for addition job
+        uses: actions/upload-artifact@v2
+        with:
+          name: homework
+          path: math-homework.txt
+  multiplication:
+    name: Multiply by 9
+    needs: addition
+    runs-on: windows-latest
+    steps:
+      - name: Download math result from addition job
+        uses: actions/download-artifact@v2
+        with:
+          name: homework
+      - shell: bash
+        run: |
+          value=`cat math-homework.txt`
+          expr $value \* 9 > math-homework.txt
+      - name: Upload math result for multiplication job
+        uses: actions/upload-artifact@v2
+        with:
+          name: homework
+          path: math-homework.txt
+  display:
+    name: Display results
+    needs: multiplication
+    runs-on: macos-latest
+    steps:
+      - name: Download math result from multiplication job
+        uses: actions/download-artifact@v2
+        with:
+          name: homework
+      - name: Print the final result
+        shell: bash
+        run: |
+          value=`cat math-homework.txt`
+          echo The result is $value
