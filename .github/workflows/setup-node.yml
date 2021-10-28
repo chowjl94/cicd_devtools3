@@ -1,31 +1,36 @@
 # this is the work flow name
 # name: setup-node
-# name: manual
-name: scheduled
+name: MANUAL
+# name: scheduled
 
 # this is the trigger
 
 ################################### MANUAL TRIGGER#############################################
-# MANUAL TRIGGER
-# on:
-#   workflow_dispatch:
-#     inputs:
-#       name:
-#         description: The name to echo
-#         default: World
-#         required: false
+
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        description: The name to echo
+        default: World
+        required: false
+jobs:
+  manual:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Hello ${{ github.event.inputs.name }}"
 ##############################################################################################
 
 
 ################################### SCHEDULE TRIGGER ########################################
-on:
-  schedule:
-    - cron: '*/1 * * * *'
-jobs:
-  scheduled:
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo This job runs every 1 minutes
+# on:
+#   schedule:
+#     - cron: '*/1 * * * *'
+# jobs:
+#   scheduled:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - run: echo This job runs every 1 minutes
 ##############################################################################################
 
 
