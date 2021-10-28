@@ -1,12 +1,15 @@
-# this is the work flow name
-# name: setup-node
-name: MANUAL
-# name: scheduled
 
-# this is the trigger
+
+
+
+
 
 ################################### MANUAL TRIGGER#############################################
 
+# this is the work flow name
+name: MANUAL
+
+# this is the trigger
 on:
   workflow_dispatch:
     inputs:
@@ -14,6 +17,8 @@ on:
         description: The name to echo
         default: World
         required: false
+
+# THESE ARE JOBS WHICH CONTAINS ACTIONS / STEPS
 jobs:
   manual:
     runs-on: ubuntu-latest
@@ -23,9 +28,14 @@ jobs:
 
 
 ################################### SCHEDULE TRIGGER ########################################
+# name: scheduled
+
+# this is the trigger
 # on:
 #   schedule:
 #     - cron: '*/1 * * * *'
+
+# THESE ARE JOBS WHICH CONTAINS ACTIONS / STEPS
 # jobs:
 #   scheduled:
 #     runs-on: ubuntu-latest
@@ -36,9 +46,16 @@ jobs:
 
 
 
-## on the push to the branch it runs the jobs below
+
+
+
+
+################################### SETUP NODE ON PUSH ########################################
+# name: setup-node
+
 
 ## the jobs runs on a runner(runs-on) which is a container to be specified eg ubuntu-lastest
+# on: [push]
 
 
 # jobs:
@@ -53,3 +70,4 @@ jobs:
 #           node-version: '14'
 #       - run: npm -v
 #       - run: node -v
+##############################################################################################
