@@ -14,7 +14,8 @@ name: setup-node
 name: scheduled
   on:
     schedule :
-      - cron: '*/2 * * * *'
+      - cron: '*/1 * * * *'
+
 
 ## on the push to the branch it runs the jobs below
 
