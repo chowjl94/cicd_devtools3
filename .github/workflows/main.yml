@@ -1,0 +1,35 @@
+name: dependent-jobs
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build_a:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "This job will be run first."
+
+  build_b:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "This job will be run first, in parallel with build_a"
+    # - run: exit 1
+
+  test_ab:
+    runs-on: ubuntu-latest
+    needs: [build_a,build_b]
+    steps:
+      - run: echo "This job will run after build_a and build_b have finished"
+
+  independent_test:
+    if: always()
+    runs-on: ubuntu-latest
+    needs: [build_a,build_b]
+    steps:
+      - run: echo "This job will run regardless of the status of build_a and build_b"
+
+  deploy_ab:
+    runs-on: ubuntu-latest
+    needs: [test_ab]
+    steps:
+      - run: echo "This job will run after test_ab is complete"
