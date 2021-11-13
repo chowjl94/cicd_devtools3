@@ -11,4 +11,13 @@ jobs:
    if: contains( github.ref, 'main')
    runs-on: ubuntu-latest
    steps:
-     - run: echo "Special job"
+     - run: |
+          OUTPUT= `aws ec2 describe-instances \
+          --filters Name=instance-type,Values=t2.micro \
+          --query Reservations[*].Instances[*].[InstanceId] \
+          --output text`
+
+
+
+
+
